@@ -7,7 +7,7 @@ app = FastAPI()
 
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
-def cantidad_filmaciones_mes(Mes:str):
+def cantidad_filmaciones_mes(mes:str):
     months = {
     "enero": 1,
     "febrero":2,
