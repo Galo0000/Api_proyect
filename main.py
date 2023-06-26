@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 import pandas as pd
 
-
-
 df_movie = pd.read_csv('api.csv')
+df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%m-%d')
 app = FastAPI()
 
 
