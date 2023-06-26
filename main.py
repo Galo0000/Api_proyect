@@ -6,6 +6,19 @@ df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%
 app = FastAPI()
 
 
+@app.get("/")
+def index():
+    cfun1 = ["Cantidad de peliculas segun mes /cantidad_filmaciones_mes/{mes}"]
+    cfun2 = ["Cantidad de peliculas segun dia semanal /cantidad_filmaciones_dia{dia}"]
+    cfun3 = ["Año escore segun titulo de pelicula /score_titulo/{titulo}"]
+    cfun4 = ["Cantidad de votos y promedio segun titulo de pelicula /votos_titulo/{titulo}"]
+    cfun5 = ["Retorno,cantidad de películas y promedio de retorno por pelicula segun titulo de pelicula /get_actor/{nombre_actor"]  
+    cfun6 = ["Actor /get_director(nombre_director)"]
+    cfun7 = ['Director /recomendacion/{titulo}']
+
+    milista = cfun1+cfun2+cfun3+cfun4+cfun5+cfun6+cfun7
+    return milista
+
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes:str):
     months = {
