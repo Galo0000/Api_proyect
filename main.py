@@ -24,7 +24,9 @@ def cantidad_filmaciones_mes(Mes:str):
     "diciembre":12}
     
     month = months.get(Mes)
-    return df_movie[(df_movie['status'] == 'Released') & (df_movie['release_month'] == month)]['release_month'].count()
+    resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_month'] == month)]['release_month'].count()
+
+    return {'mes':Mes, 'cantidad':resp}
 
 
 
@@ -42,20 +44,23 @@ def cantidad_filmaciones_dia(dia:str):
 
     day = days.get(dia)
 
-    return df_movie[(df_movie['status'] == 'Released') & (df_movie['day'] == day)]['day'].count()
+    resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['day'] == day)]['day'].count()
+
+    return {'dia':dia, 'cantidad':resp}
 
 @app.get('/score_titulo/{titulo}')
 def score_titulo(titulo:str):
-    return df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
+    resp = df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
+    return {'titulo':resp['title'], 'anio':resp['popularity'], 'popularidad':resp['release_year']}
 
 
 @app.get('/votos_titulo/{titulo}')
 def votos_titulo(titulo:str):
     if int(df_movie[df_movie['title'] == titulo]['vote_count']) > 2000:
         resp = df_movie[df_movie['title'] == titulo][['title','vote_count','vote_average']].to_dict(orient='records')[0]
+        return {'titulo':resp['title'], 'voto_total':resp['vote_count'], 'voto_promedio':resp['vote_average']}
     else:
-        resp = 'La consulta no cumple con las condicion por ende no se devuelve informacion'
-    return resp
+        return 'La consulta no cumple con las condicion por ende no se devuelve informacion'
 
 
 
