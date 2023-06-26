@@ -50,7 +50,7 @@ def cantidad_filmaciones_dia(dia:str):
 @app.get('/score_titulo/{titulo}')
 def score_titulo(titulo:str):
     resp = df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
-    return {'titulo':resp['title'], 'anio':str(resp['popularity')], 'popularidad':str(resp['release_year'])}
+    return {'titulo':resp['title'], 'año':str(resp['popularity']), 'popularidad':str(resp['release_year'])}
 
 
 @app.get('/votos_titulo/{titulo}')
