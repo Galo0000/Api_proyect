@@ -22,10 +22,10 @@ def cantidad_filmaciones_mes(mes:str):
     "noviembre":11,
     "diciembre":12}
     
-    month = months.get(Mes)
+    month = months.get(mes)
     resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_month'] == month)]['release_month'].count()
 
-    return {'mes':Mes, 'cantidad':resp}
+    return {'mes':mes, 'cantidad':str(resp)}
 
 
 
