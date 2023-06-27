@@ -82,9 +82,10 @@ def get_actor(nombre_actor:str):
     n_films = 0
     avg = 0
     for index,lista in enumerate(df_movie['actor']):
-        if nombre_actor in lista:
-            n_films += 1
-            total_return += df_movie['return'][index]
+        if type(lista) == list: 
+            if nombre_actor in lista:
+                n_films += 1
+                _return += df_movie['return'][index]
     
     if total_return == 0 and n_films == 0:
         avg = 0
