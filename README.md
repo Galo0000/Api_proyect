@@ -1,1 +1,1 @@
-<em> API de recomendacion de peliculas </em>
+<h1 align="center"> API de recomendacion de peliculas </h1>
