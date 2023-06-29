@@ -22,23 +22,29 @@ def index():
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes:str):
     months = {
-    "enero": 1,
-    "febrero":2,
-    "marzo":3,
-    "abril":4,
-    "mayo":5,
-    "junio":6,
-    "julio":7,
-    "agosto":8,
-    "septiembre":9,
-    "octubre":10,
-    "noviembre":11,
-    "diciembre":12}
-    
-    month = months.get(mes)
-    resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_month'] == month)]['release_month'].count()
+        "enero": 1,
+        "febrero": 2,
+        "marzo": 3,
+        "abril": 4,
+        "mayo": 5,
+        "junio": 6,
+        "julio": 7,
+        "agosto": 8,
+        "septiembre": 9,
+        "octubre": 10,
+        "noviembre": 11,
+        "diciembre": 12
+    }
 
-    return {'mes':mes, 'cantidad':str(resp)}
+    if not isinstance(mes, str):
+        return 'Debe ingresar un texto, por ejemplo: enero'
+    elif mes.lower() not in months:
+        return 'Debe ingresar un mes válido del año, por ejemplo: enero'
+    else:
+        mes = mes.lower()
+        month = months[mes]
+        resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_month'] == month)]['release_month'].count()
+        return {'mes': mes, 'cantidad': str(resp)}
 
 
 
