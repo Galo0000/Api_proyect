@@ -1,23 +1,17 @@
 from fastapi import FastAPI
 import pandas as pd
+import json
 
 df_movie = pd.read_csv('api.csv')
+
+with open('../Data/list_actors.txt', 'r') as file:
+    list_actors = json.load(file)
+
+with open('../Data/list_directors.txt', 'r') as file:
+    list_directors = json.load(file)
+
 df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%m-%d')
 app = FastAPI()
-
-
-@app.get("/")
-def index():
-    cfun1 = ["Cantidad de peliculas segun mes /cantidad_filmaciones_mes/{mes}"]
-    cfun2 = ["Cantidad de peliculas segun dia semanal /cantidad_filmaciones_dia{dia}"]
-    cfun3 = ["Año escore segun titulo de pelicula /score_titulo/{titulo}"]
-    cfun4 = ["Cantidad de votos y promedio segun titulo de pelicula /votos_titulo/{titulo}"]
-    cfun5 = ["Retorno,cantidad de películas y promedio de retorno por pelicula segun titulo de pelicula /get_actor/{nombre_actor"]  
-    cfun6 = ["Actor /get_director(nombre_director)"]
-    cfun7 = ['Director /recomendacion/{titulo}']
-
-    milista = cfun1+cfun2+cfun3+cfun4+cfun5+cfun6+cfun7
-    return milista
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(mes:str):
@@ -37,7 +31,7 @@ def cantidad_filmaciones_mes(mes:str):
     }
 
     if not isinstance(mes, str):
-        return 'Debe ingresar un texto, por ejemplo: enero'
+        return 'Debe ingresar un texto, por ejemplo, por ejemplo: enero'
     elif mes.lower() not in months:
         return 'Debe ingresar un mes válido del año, por ejemplo: enero'
     else:
@@ -60,23 +54,36 @@ def cantidad_filmaciones_dia(dia:str):
     'sábado': 'Saturday',
     'domingo': 'Sunday'}
 
-    day = days.get(dia)
-
-    resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['day'] == day)]['day'].count()
-
-    return {'dia':dia, 'cantidad':str(resp)}
+    if not isinstance(dia, str):
+        return 'Debe ingresar un texto, por ejemplo: sabado'
+    elif dia.lower() not in days:
+        return 'Debe ingresar un dia de la semana, por ejemplo: sabado'
+    else:
+        dia = dia.lower()
+        day = days[dia]
+        resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_day'] == day)]['release_day'].count()
+        return {'dia':dia, 'cantidad':resp}
 
 @app.get('/score_titulo/{titulo}')
 def score_titulo(titulo:str):
-    resp = df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
-    return {'titulo':resp['title'], 'año':str(resp['popularity']), 'popularidad':str(resp['release_year'])}
+    if not isinstance(titulo, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie == titulo).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    else:
+        resp = df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
+        return {'titulo':resp['title'], 'popularidad':resp['popularity'], 'año':resp['release_year']}
 
 
 @app.get('/votos_titulo/{titulo}')
 def votos_titulo(titulo:str):
-    if int(df_movie[df_movie['title'] == titulo]['vote_count']) > 2000:
+    if not isinstance(titulo, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie == titulo).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    elif int(df_movie[df_movie['title'] == titulo]['vote_count']) > 2000:
         resp = df_movie[df_movie['title'] == titulo][['title','vote_count','vote_average']].to_dict(orient='records')[0]
-        return {'titulo':resp['title'], 'voto_total':str(resp['vote_count']), 'voto_promedio':str(resp['vote_average'])}
+        return {'titulo':resp['title'], 'voto_total':resp['vote_count'], 'voto_promedio':resp['vote_average']}
     else:
         return 'La consulta no cumple con las condicion por ende no se devuelve informacion'
 
@@ -84,41 +91,52 @@ def votos_titulo(titulo:str):
 
 @app.get('/get_actor/{nombre_actor}')
 def get_actor(nombre_actor:str):
-    total_return = 0
+    if not isinstance(nombre_actor, str):
+        return 'Debe ingresar un texto'
+    elif nombre_actor not in list_actors:
+        return 'El actor no se encuentra en la base de datos'
+
+    _return = 0
     n_films = 0
     avg = 0
-    for index,lista in enumerate(df_movie['actor']):
+    for index,lista in enumerate(df_movie['actors']):
         if type(lista) == list: 
             if nombre_actor in lista:
                 n_films += 1
                 _return += df_movie['return'][index]
     
-    if total_return == 0 and n_films == 0:
+    if _return == 0 and n_films == 0:
         avg = 0
     else:
-        avg = total_return/n_films
+        avg = _return/n_films
 
-    return {'actor':nombre_actor, 'cantidad_filmaciones':str(n_films), 'retorno_total':str(total_return), 'retorno_promedio':str(avg)}
+    return {'actor':nombre_actor, 'cantidad_filmaciones':n_films, 'retorno_total':_return, 'retorno_promedio':avg}
 
 
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director:str):
+    if not isinstance(nombre_director, str):
+        return 'Debe ingresar un texto'
+    elif nombre_director not in list_directors:
+        return 'El director no se encuentra en la base de datos'
+
     total_return = 0
     movies = []
     years = []
     _return = []
     budget = []
     revenue = []
-    for index,lista in enumerate(df_movie['director']):
-        if nombre_director in lista:
-            total_return += df_movie['return'][index]
-            movies.append(df_movie['title'][index])
-            years.append(df_movie['release_year'][index])
-            _return.append(df_movie['return'][index])
-            budget.append(df_movie['budget'][index])
-            revenue.append(df_movie['revenue'][index])
+    for index,lista in enumerate(df_movie['directors']):
+        if type(lista) == list:
+            if nombre_director in lista:
+                total_return += df_movie['return'][index]
+                movies.append(df_movie['title'][index])
+                years.append(df_movie['release_year'][index])
+                _return.append(df_movie['return'][index])
+                budget.append(df_movie['budget'][index])
+                revenue.append(df_movie['revenue'][index])
 
-    return {'director':nombre_director, 'retorno_total_director':str(total_return), 
-    'peliculas':movies, 'anio':str(years), 'retorno_pelicula':str(_return), 
-    'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
+    return {'director':nombre_director, 'retorno_total_director':total_return, 
+    'peliculas':movies, 'año':years, 'retorno_pelicula':_return, 
+    'budget_pelicula':budget, 'revenue_pelicula':revenue}
