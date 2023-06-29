@@ -10,7 +10,8 @@ with open('../Data/list_actors.txt', 'r') as file:
 with open('../Data/list_directors.txt', 'r') as file:
     list_directors = json.load(file)
 
-df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%m-%d')
+#df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%m-%d')
+
 app = FastAPI()
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
