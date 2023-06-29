@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import pandas as pd
 import json
 
-df_movie = pd.read_csv('../Data/api.csv')
+df_movie = pd.read_csv('../Data/api.json')
 
 with open('../Data/list_actors.txt', 'r') as file:
     list_actors = json.load(file)
