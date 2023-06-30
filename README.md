@@ -112,7 +112,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.png">
 
 <p style="text-align:center">&nbsp;</p>
 
