@@ -1,3 +1,4 @@
+# importa las librerias necesarias
 from fastapi import FastAPI
 import pandas as pd
 import pickle
@@ -5,12 +6,15 @@ import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 
+# carga la base de datos contenia de el archivo picke
 df_movie = pd.read_pickle('./Data/api.pickle')
 
-
+# Crea una instamcia de la clase FASTAPI
 app = FastAPI()
 
+# Decorador en el framework FastAPI que define una ruta para una solicitud HTTP GET
 @app.get('/cantidad_filmaciones_mes/{mes}')
+# Esta funcion tiene como parametro un mes del año y retorna un diccionario con mes y cantidad de peliculas estrenadas ese mismo mes
 def cantidad_filmaciones_mes(mes:str):
     months = {
         "enero": 1,
@@ -41,6 +45,7 @@ def cantidad_filmaciones_mes(mes:str):
 
 
 @app.get('/cantidad_filmaciones_dia{dia}')
+# Esta funcion tiene como parametro un dia de la semana y retorna un diccionario con dia y cantidad de peliculas estrenadas ese mismo dia
 def cantidad_filmaciones_dia(dia:str):
     days = {
     'lunes': 'Monday',
@@ -61,7 +66,10 @@ def cantidad_filmaciones_dia(dia:str):
         resp = df_movie[(df_movie['release_day'] == day)]['release_day'].count()
         return {'dia':dia, 'cantidad':str(resp)}
 
+
+
 @app.get('/score_titulo/{titulo}')
+# Tiene como parametro un titulo de una pelicula y retorna en un diccionario con el titulo,popularidad y año de estreno de la pelicula
 def score_titulo(titulo:str):
     if not isinstance(titulo, str):
         return 'Debe ingresar un texto'
@@ -73,6 +81,7 @@ def score_titulo(titulo:str):
 
 
 @app.get('/votos_titulo/{titulo}')
+# Tiene como parametro un titulo de una pelicula y retorna en un diccionario con el titulo, votos totales, votacion promedio por pelicula
 def votos_titulo(titulo:str):
     if not isinstance(titulo, str):
         return 'Debe ingresar un texto'
@@ -87,6 +96,8 @@ def votos_titulo(titulo:str):
 
 
 @app.get('/get_actor/{nombre_actor}')
+# Tiene como parametro un nombre de actor y retorna en un diccionario el nombre del actor, la cantidad de filmaciones en las que participo, 
+# retorno de cada pelicula y promedio de retorno por pelicula
 def get_actor(nombre_actor:str):
     if not isinstance(nombre_actor, str):
         return 'Debe ingresar un texto'
@@ -113,6 +124,8 @@ def get_actor(nombre_actor:str):
 
 
 @app.get('/get_director/{nombre_director}')
+# esta funcion tiene como parametro un nombre de director de alguna pelicula y retorna en nombre del director, retorno total de las peliculas en las que participo
+# nombre de las peliculas y revenue de cada pelicula.
 def get_director(nombre_director:str):
     if not isinstance(nombre_director, str):
         return 'Debe ingresar un texto'
@@ -140,6 +153,7 @@ def get_director(nombre_director:str):
     'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
 
 @app.get('/recomendacion/{titulo}')
+# Funcion que tiene como parametro un titulo de pelicula y retorna 5 recomendaciones a partir de esta con un sistema de machine learning.
 def recomendacion(titulo:str):
     if not isinstance(titulo, str):
         return 'Debe ingresar un texto'
