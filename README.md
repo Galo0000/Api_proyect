@@ -1,7 +1,6 @@
-<h1 align="center"> API de recomendacion de peliculas </h1>
-<h4 align="center">
-El proyecto consiste en crear una API que reponda consultas y recomiende 5 peliculas en base a una ingresada, la api buscara la informacion en un base de datos que previamente paso por un proceso de ETL y de EDA para la creacion del modelo de ML.
-</h4>
+<h1 style="text-align:center">API de consulta y recomendacion de peliculas</h1>
+
+<h4><span style="font-size:16px">El proyecto consiste en crear una API que reponda consultas y recomiende 5 peliculas en base a una ingresada, la api buscara la informacion en un base de datos que previamente paso por un proceso de ETL y de EDA para la creacion del modelo de ML.</span></h4>
 
 <h2><strong><span style="font-size:26px">Requerimientos:</span></strong></h2>
 
@@ -18,6 +17,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 	<li><span style="font-size:18px">Seaborn: Una libreria de visualizaci&oacute;n de datos en Python basada en Matplotlib.</span></li>
 	<li><span style="font-size:18px">Uvicorn: Un servidor web de alto rendimiento para aplicaciones web en Python.</span></li>
 	<li><span style="font-size:18px">Wordcloud: Una libreria para crear nubes de palabras en Python.</span></li>
+	<li><span style="font-size:18px">Picke: Una libreria ya incorporada&nbsp;en Python para archivos tipo pickle.</span></li>
 </ul>
 
 <p><strong><span style="font-size:26px">Estructura de carpetas</span></strong></p>
@@ -65,7 +65,6 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Una vez finalizada la etapa de ETL, se guard&oacute; el dataframe resultante en un archivo pickle. Posteriormente, se cre&oacute; otro dataframe con la informaci&oacute;n que ser&iacute;a solicitada por la API, con el objetivo de reducir el tama&ntilde;o del archivo llamado &quot;api.pickle&quot;. Finalmente, se gener&oacute; otro dataframe orientado al uso del modelo de machine learning llamado &quot;ML.pickle&quot;.</span></p>
 
-
 <p style="text-align:center">&nbsp;</p>
 
 <p style="text-align:center"><strong><span style="font-size:28px">EDA</span></strong></p>
@@ -78,9 +77,11 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Grafico de correlacion</span></p>
 
+<p style="text-align:center"><span style="font-size:18px">Un gr&aacute;fico de correlaci&oacute;n muestra la relaci&oacute;n entre dos variables. Los puntos en el gr&aacute;fico representan las observaciones y su ubicaci&oacute;n indica los valores de las variables. Se utiliza para identificar la fuerza y direcci&oacute;n de la relaci&oacute;n entre las variables.</span></p>
+
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.jpg">
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.jpg" /></p>
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -92,7 +93,11 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/nubepalabras.jpg">
+<p style="text-align:center"><span style="font-size:18px">Un gr&aacute;fico de nubes de palabras es una representaci&oacute;n visual que muestra las palabras m&aacute;s frecuentes en un texto o conjunto de datos. En este tipo de gr&aacute;fico, las palabras se presentan en tama&ntilde;o y posici&oacute;n seg&uacute;n su importancia o frecuencia, siendo las palabras m&aacute;s comunes m&aacute;s grandes y destacadas. Es una forma r&aacute;pida y visualmente atractiva de resumir y visualizar los t&eacute;rminos clave o temas dominantes en un conjunto de texto.</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/nubepalabras.jpg" /></p>
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -102,23 +107,30 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Matriz de graficos de dispersion</span></p>
 
-<p style="text-align:center">&nbsp;</p>
-
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.jpg">
+<p style="text-align:center"><span style="font-size:18px">Una matriz de gr&aacute;ficos de dispersi&oacute;n es una representaci&oacute;n visual que muestra m&uacute;ltiples gr&aacute;ficos de dispersi&oacute;n en una matriz. Cada gr&aacute;fico de dispersi&oacute;n compara la relaci&oacute;n entre dos variables diferentes. Esta matriz permite una r&aacute;pida comparaci&oacute;n y an&aacute;lisis de m&uacute;ltiples relaciones entre variables al mismo tiempo.</span></p>
 
 <p style="text-align:center">&nbsp;</p>
 
-<p style="text-align:center"><span style="font-size:18px">Outlaiers</span></p>
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.jpg" /></p>
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.jpg">
+<p style="text-align:center"><span style="font-size:18px">Grafico de cajas</span></p>
+
+<p style="text-align:center"><span style="font-size:18px">Un gr&aacute;fico de cajas, tambi&eacute;n conocido como diagrama de caja y bigotes, es una representaci&oacute;n visual que muestra la distribuci&oacute;n de un conjunto de datos mediante una caja y l&iacute;neas llamadas &quot;bigotes&quot;. La caja representa el rango intercuart&iacute;lico, es decir, el 50% central de los datos, mientras que los bigotes representan el m&iacute;nimo y m&aacute;ximo no considerados como valores at&iacute;picos. Adem&aacute;s, una l&iacute;nea dentro de la caja marca la mediana. Este gr&aacute;fico es &uacute;til para analizar la dispersi&oacute;n y la simetr&iacute;a de los datos, as&iacute; como para identificar valores at&iacute;picos potenciales.</span></p>
 
 <p style="text-align:center">&nbsp;</p>
+
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.jpg" /></p>
+
+<p style="text-align:center"><span style="font-size:18px">Grafico de cajas de popularity donde se observo la mayor distancia entre los valores</span></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
 <p style="text-align:center"><span style="font-size:18px">Video de demostracion</span></p>
-
 
 <p style="text-align:center"><span style="font-size:18px">https://drive.google.com/file/d/1YsZ5kiKXRAjKQwt2JpgNH8QUQQWhvB7w/view?usp=drive_link</span></p>
