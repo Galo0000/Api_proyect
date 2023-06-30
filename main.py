@@ -1,16 +1,14 @@
 from fastapi import FastAPI
 import pandas as pd
-import json
+import pickle
 
 df_movie = pd.read_json('../Data/api.json')
 
-with open('../Data/list_actors.txt', 'r') as file:
-    list_actors = json.load(file)
+with open('../Data/list_actors.pickle', 'rb') as archivo:
+    list_actors = pickle.load(archivo)
 
-with open('../Data/list_directors.txt', 'r') as file:
-    list_directors = json.load(file)
-
-#df_movie['release_date'] = pd.to_datetime(df_movie['release_date'], format='%Y-%m-%d')
+with open('../Data/list_directors.pickle', 'rb') as archivo:
+    list_directors = pickle.load(archivo)
 
 app = FastAPI()
 
