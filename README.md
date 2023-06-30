@@ -104,6 +104,12 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
+<p style="text-align:center"><span style="font-size:18px">Outlaiers</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.png">
+
 <p style="text-align:center">&nbsp;</p>
 
 <p>&nbsp;</p>

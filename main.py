@@ -143,3 +143,8 @@ def get_director(nombre_director:str):
     return {'director':nombre_director, 'retorno_total_director':str(total_return), 
     'peliculas':str(movies), 'año':str(years), 'retorno_pelicula':str(_return), 
     'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
+
+@app.get('/recomendacion/{titulo}')
+def recomendacion(titulo:str):
+    '''Ingresas un nombre de pelicula y te recomienda las similares en una lista'''
+    return {'lista recomendada': resp}
