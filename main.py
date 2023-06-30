@@ -3,10 +3,10 @@ import pandas as pd
 import pickle
 
 #df_movie = pd.read_json('../Data/api.pickle')
+df_movie = pd.read_pickle('./Data/api37.pickle')
 
-
-with open('./Data/api37.pickle', 'rb') as archivo:
-    df_movie = pickle.load(archivo)
+#with open('./Data/api37.pickle', 'rb') as archivo:
+#    df_movie = pickle.load(archivo)
 
 with open('./Data/list_actors37.pickle', 'rb') as archivo:
     list_actors = pickle.load(archivo)
