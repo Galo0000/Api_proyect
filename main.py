@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import pandas as pd
 import pickle
 
-df_movie = pd.read_json('../Data/api.json')
+df_movie = pd.read_json('../Data/api.pickle')
 
 with open('../Data/list_actors.pickle', 'rb') as archivo:
     list_actors = pickle.load(archivo)
