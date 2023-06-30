@@ -61,4 +61,41 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Una vez finalizada la etapa de ETL, se guard&oacute; el dataframe resultante en un archivo pickle. Posteriormente, se cre&oacute; otro dataframe con la informaci&oacute;n que ser&iacute;a solicitada por la API, con el objetivo de reducir el tama&ntilde;o del archivo llamado &quot;api.pickle&quot;. Finalmente, se gener&oacute; otro dataframe orientado al uso del modelo de machine learning llamado &quot;ML.pickle&quot;.</span></p>
 
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><strong><span style="font-size:28px">EDA</span></strong></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-size:18px">El EDA (An&aacute;lisis Exploratorio de Datos) es una t&eacute;cnica utilizada en ciencia de datos para explorar, analizar y comprender los datos antes de realizar an&aacute;lisis m&aacute;s avanzados. Ayuda a identificar patrones, detectar anomal&iacute;as y obtener informaci&oacute;n relevante para investigaciones posteriores.</span></p>
+
+<p style="text-align:center"><span style="font-size:18px">Analisis de los datos numericos del dataframe</span></p>
+
+<img src="../Images/corr.png">
+
+<p style="text-align:center"><span style="font-size:18px">Grafico de correlacion</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-size:18px">Se puede observar que los columnas con mayor correlacion son budget, popularity, revenue, vote_count.</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-size:18px">Grafico nube de palabras</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-size:18px">Aqui se muestra las palabras en los nombres de cada pelicula que mas se repiten en la base de datos</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center"><span style="font-size:18px">Matriz de graficos de dispersion</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p style="text-align:center">&nbsp;</p>
+
 <p>&nbsp;</p>
