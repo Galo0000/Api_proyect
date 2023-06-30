@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 import pandas as pd
 import pickle
+import joblib
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.neighbors import NearestNeighbors
 
 #df_movie = pd.read_json('../Data/api.pickle')
 df_movie = pd.read_pickle('./Data/api.pickle')
@@ -96,17 +99,18 @@ def votos_titulo(titulo:str):
 def get_actor(nombre_actor:str):
     if not isinstance(nombre_actor, str):
         return 'Debe ingresar un texto'
-    elif nombre_actor not in list_actors:
+    
+    elif not any(nombre_actor in sublist for sublist in df_movie['actors'] if sublist):
         return 'El actor no se encuentra en la base de datos'
 
     _return = 0
     n_films = 0
     avg = 0
     for index,lista in enumerate(df_movie['actors']):
-        if type(lista) == list: 
+        if lista: 
             if nombre_actor in lista:
                 n_films += 1
-                _return += df_movie['return'][index]
+                _return += df_movie['return'].iloc[index]
     
     if _return == 0 and n_films == 0:
         avg = 0
@@ -121,7 +125,7 @@ def get_actor(nombre_actor:str):
 def get_director(nombre_director:str):
     if not isinstance(nombre_director, str):
         return 'Debe ingresar un texto'
-    elif nombre_director not in list_directors:
+    elif not any(nombre_director in sublist for sublist in df_movie['directors'] if sublist):
         return 'El director no se encuentra en la base de datos'
 
     total_return = 0
@@ -131,7 +135,7 @@ def get_director(nombre_director:str):
     budget = []
     revenue = []
     for index,lista in enumerate(df_movie['directors']):
-        if type(lista) == list:
+        if lista:
             if nombre_director in lista:
                 total_return += df_movie['return'][index]
                 movies.append(df_movie['title'][index])
@@ -146,5 +150,15 @@ def get_director(nombre_director:str):
 
 @app.get('/recomendacion/{titulo}')
 def recomendacion(titulo:str):
-    '''Ingresas un nombre de pelicula y te recomienda las similares en una lista'''
-    return {'lista recomendada': resp}
+    if not isinstance(titulo, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie == titulo).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    # Cargo los modelos entrenados
+    tfidf_model = joblib.load("./Models/tfidf_model.pkl")
+    knn_model = joblib.load("./Models/knn_model.pkl")
+
+    title_vector = tfidf_model.transform([titulo])  # Transforma el título de entrada en una representación vectorial
+    _, indices = knn_model.kneighbors(title_vector)  # Busca los vecinos más cercanos basados en la representación vectorial
+    recommendations = df_movie["title"].iloc[indices[0][1:]].tolist()  # Obtiene los títulos de las películas más similares (excluyendo la película de referencia)
+    return {'lista recomendada': str(recommendations)}
