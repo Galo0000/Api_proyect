@@ -65,7 +65,7 @@ def cantidad_filmaciones_dia(dia:str):
         dia = dia.lower()
         day = days[dia]
         resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_day'] == day)]['release_day'].count()
-        return {'dia':dia, 'cantidad':resp}
+        return {'dia':dia, 'cantidad':str(resp)}
 
 @app.get('/score_titulo/{titulo}')
 def score_titulo(titulo:str):
@@ -75,7 +75,7 @@ def score_titulo(titulo:str):
         return 'La pelicula no se encuentra en la base de datos'
     else:
         resp = df_movie[df_movie['title'] == titulo][['title','popularity','release_year']].to_dict(orient='records')[0]
-        return {'titulo':resp['title'], 'popularidad':resp['popularity'], 'año':resp['release_year']}
+        return {'titulo':resp['title'], 'popularidad':str(resp['popularity']), 'año':str(resp['release_year'])}
 
 
 @app.get('/votos_titulo/{titulo}')
@@ -86,7 +86,7 @@ def votos_titulo(titulo:str):
         return 'La pelicula no se encuentra en la base de datos'
     elif int(df_movie[df_movie['title'] == titulo]['vote_count']) > 2000:
         resp = df_movie[df_movie['title'] == titulo][['title','vote_count','vote_average']].to_dict(orient='records')[0]
-        return {'titulo':resp['title'], 'voto_total':resp['vote_count'], 'voto_promedio':resp['vote_average']}
+        return {'titulo':resp['title'], 'voto_total':str(resp['vote_count']), 'voto_promedio':str(resp['vote_average'])}
     else:
         return 'La consulta no cumple con las condicion por ende no se devuelve informacion'
 
@@ -113,7 +113,7 @@ def get_actor(nombre_actor:str):
     else:
         avg = _return/n_films
 
-    return {'actor':nombre_actor, 'cantidad_filmaciones':n_films, 'retorno_total':_return, 'retorno_promedio':avg}
+    return {'actor':nombre_actor, 'cantidad_filmaciones':str(n_films), 'retorno_total':str(_return), 'retorno_promedio':str(avg)}
 
 
 
@@ -140,6 +140,6 @@ def get_director(nombre_director:str):
                 budget.append(df_movie['budget'][index])
                 revenue.append(df_movie['revenue'][index])
 
-    return {'director':nombre_director, 'retorno_total_director':total_return, 
-    'peliculas':movies, 'año':years, 'retorno_pelicula':_return, 
-    'budget_pelicula':budget, 'revenue_pelicula':revenue}
+    return {'director':nombre_director, 'retorno_total_director':str(total_return), 
+    'peliculas':str(movies), 'año':str(years), 'retorno_pelicula':str(_return), 
+    'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
