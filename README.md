@@ -72,7 +72,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Analisis de los datos numericos del dataframe</span></p>
 
-<img src="../Images/corr.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.png">
 
 <p style="text-align:center"><span style="font-size:18px">Grafico de correlacion</span></p>
 
