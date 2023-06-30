@@ -80,7 +80,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.jpg">
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -92,7 +92,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/nubepalabras.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/nubepalabras.jpg">
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -104,7 +104,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.jpg">
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -112,7 +112,7 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.png">
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.jpg">
 
 <p style="text-align:center">&nbsp;</p>
 
