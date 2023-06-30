@@ -32,6 +32,10 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p><span style="font-size:20px">requirements.txt: Contiene la lista de librerias necesarias para el entorno virtual de render.</span></p>
 
+<p><span style="font-size:20px">Models: Esta carpeta contiene archivos pkl de los modelos entrenados de machine learning.</span></p>
+
+<p><span style="font-size:20px">Images: Esta carpeta contiene imagenes de la etapa de EDA.</span></p>
+
 <p>&nbsp;</p>
 
 <p><span style="font-size:26px"><strong>Descripci&oacute;n del Proyecto</strong></span></p>
