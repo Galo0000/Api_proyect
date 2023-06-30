@@ -58,7 +58,7 @@ def cantidad_filmaciones_dia(dia:str):
     else:
         dia = dia.lower()
         day = days[dia]
-        resp = df_movie[(df_movie['status'] == 'Released') & (df_movie['release_day'] == day)]['release_day'].count()
+        resp = df_movie[(df_movie['release_day'] == day)]['release_day'].count()
         return {'dia':dia, 'cantidad':str(resp)}
 
 @app.get('/score_titulo/{titulo}')
