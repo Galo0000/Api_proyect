@@ -72,9 +72,11 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Analisis de los datos numericos del dataframe</span></p>
 
-<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.png">
-
 <p style="text-align:center"><span style="font-size:18px">Grafico de correlacion</span></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/corr.png">
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -86,6 +88,10 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center">&nbsp;</p>
 
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/nubepalabras.png">
+
+<p style="text-align:center">&nbsp;</p>
+
 <p style="text-align:center"><span style="font-size:18px">Aqui se muestra las palabras en los nombres de cada pelicula que mas se repiten en la base de datos</span></p>
 
 <p style="text-align:center">&nbsp;</p>
@@ -93,6 +99,8 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 <p style="text-align:center"><span style="font-size:18px">Matriz de graficos de dispersion</span></p>
 
 <p style="text-align:center">&nbsp;</p>
+
+<img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/pairplt.png">
 
 <p style="text-align:center">&nbsp;</p>
 
