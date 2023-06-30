@@ -120,6 +120,5 @@ El proyecto consiste en crear una API que reponda consultas y recomiende 5 pelic
 
 <p style="text-align:center"><span style="font-size:18px">Video de demostracion</span></p>
 
-<video src="https://drive.google.com/file/d/1YsZ5kiKXRAjKQwt2JpgNH8QUQQWhvB7w/view?usp=drive_link" autoplay poster="posterimage.jpg">
-  Tu navegador no admite el elemento <code>video</code>.
-</video>
+
+<p style="text-align:center"><span style="font-size:18px">https://drive.google.com/file/d/1YsZ5kiKXRAjKQwt2JpgNH8QUQQWhvB7w/view?usp=drive_link</span></p>
