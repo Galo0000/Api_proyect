@@ -5,7 +5,7 @@ import pickle
 #df_movie = pd.read_json('../Data/api.pickle')
 
 
-with open('./Data/api.pickle37', 'rb') as archivo:
+with open('./Data/api37.pickle', 'rb') as archivo:
     df_movie = pickle.load(archivo)
 
 with open('./Data/list_actors37.pickle', 'rb') as archivo:
