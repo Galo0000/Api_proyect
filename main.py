@@ -1,7 +1,6 @@
 # importa las librerias necesarias
 from fastapi import FastAPI
 import pandas as pd
-import pickle
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
@@ -11,6 +10,16 @@ df_movie = pd.read_pickle('./Data/api.pickle')
 
 # Crea una instamcia de la clase FASTAPI
 app = FastAPI()
+
+@app.get('/peliculas_idioma/{idioma}')
+def peliculas_idioma(idioma:str):
+    df_movie[df_movie[idioma]]
+
+    return {'idioma':idioma, 'cantidad':respuesta}
+
+
+
+#####################################################################################
 
 # Decorador en el framework FastAPI que define una ruta para una solicitud HTTP GET
 @app.get('/cantidad_filmaciones_mes/{mes}')
