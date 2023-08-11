@@ -109,6 +109,24 @@ def get_director(nombre_director:str):
     'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
 
 
+@app.get('/recomendacion/{titulo}')
+
+# Funcion que tiene como parametro un titulo de pelicula y retorna 5 recomendaciones a partir de esta con un sistema de machine learning.
+def recomendacion(titulo:str):
+    if not isinstance(titulo, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie == titulo).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    # Cargo los modelos entrenados
+    tfidf_model = joblib.load("./Models/tfidf_model.pkl")
+    knn_model = joblib.load("./Models/knn_model.pkl")
+
+    title_vector = tfidf_model.transform([titulo])  # Transforma el título de entrada en una representación vectorial
+    _, indices = knn_model.kneighbors(title_vector)  # Busca los vecinos más cercanos basados en la representación vectorial
+    recommendations = df_movie["title"].iloc[indices[0][1:]].tolist()  # Obtiene los títulos de las películas más similares (excluyendo la película de referencia)
+    return {'lista recomendada': str(recommendations)}
+
+
 
 #####################################################################################
 
@@ -226,19 +244,3 @@ def get_actor(nombre_actor:str):
     return {'actor':nombre_actor, 'cantidad_filmaciones':str(n_films), 'retorno_total':str(_return), 'retorno_promedio':str(avg)}
 
 
-@app.get('/recomendacion/{titulo}')
-
-# Funcion que tiene como parametro un titulo de pelicula y retorna 5 recomendaciones a partir de esta con un sistema de machine learning.
-def recomendacion(titulo:str):
-    if not isinstance(titulo, str):
-        return 'Debe ingresar un texto'
-    elif not (df_movie == titulo).any().any():
-        return 'La pelicula no se encuentra en la base de datos'
-    # Cargo los modelos entrenados
-    tfidf_model = joblib.load("./Models/tfidf_model.pkl")
-    knn_model = joblib.load("./Models/knn_model.pkl")
-
-    title_vector = tfidf_model.transform([titulo])  # Transforma el título de entrada en una representación vectorial
-    _, indices = knn_model.kneighbors(title_vector)  # Busca los vecinos más cercanos basados en la representación vectorial
-    recommendations = df_movie["title"].iloc[indices[0][1:]].tolist()  # Obtiene los títulos de las películas más similares (excluyendo la película de referencia)
-    return {'lista recomendada': str(recommendations)}
