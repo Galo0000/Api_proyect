@@ -13,7 +13,7 @@
 	<li><span style="font-size:18px">Pandas: Una libreria para an&aacute;lisis y manipulaci&oacute;n de datos en Python.</span></li>
 	<li><span style="font-size:18px">NumPy: Una libreria para procesamiento num&eacute;rico en Python.</span></li>
 	<li><span style="font-size:18px">Scikit-learn (Sklearn): Una libreria de aprendizaje autom&aacute;tico en Python.</span></li>
-	<li><span style="font-size:18px">SciPy: Una libreria para procesamiento y an&aacute;lisis cient&iacute;fico en Python.</span></li>
+	<li><span style="font-size:18px">Missingno: Es una librería en Python para visualizar valores faltantes en datos.</span></li>
 	<li><span style="font-size:18px">Seaborn: Una libreria de visualizaci&oacute;n de datos en Python basada en Matplotlib.</span></li>
 	<li><span style="font-size:18px">Uvicorn: Un servidor web de alto rendimiento para aplicaciones web en Python.</span></li>
 	<li><span style="font-size:18px">Wordcloud: Una libreria para crear nubes de palabras en Python.</span></li>
@@ -101,7 +101,7 @@
 
 <p style="text-align:center">&nbsp;</p>
 
-<p style="text-align:center"><span style="font-size:18px">Aqui se muestra las palabras en los nombres de cada pelicula que mas se repiten en la base de datos</span></p>
+<p style="text-align:center"><span style="font-size:18px">Aqui se muestra las palabras en los nombres de cada pelicula que mas se repiten en la base de datos, mostrando las mas recurrentes en mayor tamaño como Love o Man.</span></p>
 
 <p style="text-align:center">&nbsp;</p>
 
@@ -129,6 +129,8 @@
 
 <p>&nbsp;</p>
 
+<p style="text-align:center"><span style="font-size:18px">Todas las columnas tiene outiers y a excepcion de "vote_average" que tambien los tiene, sus valores no estan demaciado alejados entre si.</span></p>
+
 <p>&nbsp;</p>
 
 <p style="text-align:center"><span style="font-size:18px">Histograma</span></p>
@@ -142,12 +144,20 @@ En el historigrama de 'vote_average' se puede observar que el promedio que mas c
 
 <p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/matrix.jpg" /></p>
 
+<p style="text-align:center"><span style="font-size:18px">Este grafico muesta de forma grafica con barras los datos vacios por columna, representando los datos vacios con espacios en blanco en cada barra.</span></p>
+
 <p>&nbsp;</p>
 
 <p><img src="Images/countplot_original_language.jpg" /></p>
 
+<p style="text-align:center"><span style="font-size:18px">Se observa lo predecible teiniendo en cuenta la industria del cine en EEUU, la dominancia de las peliculas con lenguaje original en ingles.</span></p>
+
+<p>&nbsp;</p>
 
 <p style="text-align:center"><span style="font-size:18px">Video de demostracion</span></p>
 
 <p style="text-align:center"><span style="font-size:18px">https://drive.google.com/file/d/1SIkIIl7BMvDzbR0ywRDJXFvZzboNa892/view?usp=sharing</span></p>
+
+
+
 
