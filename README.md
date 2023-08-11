@@ -121,15 +121,26 @@
 
 <p style="text-align:center">&nbsp;</p>
 
-<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/popularity.jpg" /></p>
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/boxplot_popularity.jpg" /></p>
 
-<p style="text-align:center"><span style="font-size:18px">Grafico de cajas de popularity donde se observo la mayor distancia entre los valores</span></p>
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/boxplot_runtime.jpg" /></p>
+
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/boxplot_voteaverage.jpg" /></p>
+
+<p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<p>&nbsp;</p>
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/Historigrama_voteaverage.jpg" /></p>
 
 <p>&nbsp;</p>
+
+<p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/matrix.jpg" /></p>
+
+<p>&nbsp;</p>
+
+<p><img src="Images/countplot_original_language.jpg" /></p>
+
 
 <p style="text-align:center"><span style="font-size:18px">Video de demostracion</span></p>
 
