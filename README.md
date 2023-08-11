@@ -133,6 +133,7 @@
 <p>&nbsp;</p>
 
 <p style="text-align:center"><span style="font-size:18px">Histograma</span></p>
+<p style="text-align:center"><span style="font-size:18px">Un histograma es un gráfico que muestra la distribución de frecuencia de diferentes valores en un conjunto de datos, dividiendo el rango de valores en "barras" y mostrando cuántos datos caen en cada barra.</span></p>
 
 <p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/Historigrama_voteaverage.jpg" /></p>
 
