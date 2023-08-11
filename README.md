@@ -131,7 +131,12 @@
 
 <p>&nbsp;</p>
 
+<p style="text-align:center"><span style="font-size:18px">Histograma</span></p>
+
 <p><img src="https://github.com/Galo0000/Api_proyect/blob/main/Images/Historigrama_voteaverage.jpg" /></p>
+
+<p style="text-align:center"><span style="font-size:18px">Los histogramas de las columnas con valores numeros muestran que solo de la columna 'vote_average' ya que no contiene valores demasiado cercanos en la escala.
+En el historigrama de 'vote_average' se puede observar que el promedio que mas conteos tiene son los promedios de votos de 6 a 7.</span></p>
 
 <p>&nbsp;</p>
 
@@ -144,4 +149,5 @@
 
 <p style="text-align:center"><span style="font-size:18px">Video de demostracion</span></p>
 
-<p style="text-align:center"><span style="font-size:18px">https://drive.google.com/file/d/1YsZ5kiKXRAjKQwt2JpgNH8QUQQWhvB7w/view?usp=drive_link</span></p>
+<p style="text-align:center"><span style="font-size:18px">https://drive.google.com/file/d/1SIkIIl7BMvDzbR0ywRDJXFvZzboNa892/view?usp=sharing</span></p>
+
