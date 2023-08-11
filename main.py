@@ -23,7 +23,7 @@ def peliculas_idioma(idioma:str):
 
     return {'idioma':idioma, 'cantidad': str(respuesta)}
     
- @app.get('/peliculas_duracion/{pelicula}')
+@app.get('/peliculas_duracion/{pelicula}')
 
 # esta funcion pide como parametro en nombre de una pelicula y retorna un diccionario con en nombre de la pelicula, duracion en minutos y el año de estreno
 def peliculas_duracion(pelicula:str):
