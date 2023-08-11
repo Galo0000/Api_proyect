@@ -11,7 +11,6 @@
 <ul>
 	<li><span style="font-size:18px">FastAPI: Un marco web r&aacute;pido y f&aacute;cil de usar para crear APIs en Python.</span></li>
 	<li><span style="font-size:18px">Pandas: Una libreria para an&aacute;lisis y manipulaci&oacute;n de datos en Python.</span></li>
-	<li><span style="font-size:18px">NumPy: Una libreria para procesamiento num&eacute;rico en Python.</span></li>
 	<li><span style="font-size:18px">Scikit-learn (Sklearn): Una libreria de aprendizaje autom&aacute;tico en Python.</span></li>
 	<li><span style="font-size:18px">Missingno: Es una librería en Python para visualizar valores faltantes en datos.</span></li>
 	<li><span style="font-size:18px">Seaborn: Una libreria de visualizaci&oacute;n de datos en Python basada en Matplotlib.</span></li>
