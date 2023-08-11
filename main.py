@@ -11,17 +11,107 @@ df_movie = pd.read_pickle('./Data/api.pickle')
 # Crea una instamcia de la clase FASTAPI
 app = FastAPI()
 
+# Decorador en el framework FastAPI que define una ruta para una solicitud HTTP GET
 @app.get('/peliculas_idioma/{idioma}')
-def peliculas_idioma(idioma:str):
-    df_movie[df_movie[idioma]]
 
-    return {'idioma':idioma, 'cantidad':respuesta}
+# Esta funcion pide como parametro un nombre corto de un idioma y retorna un diccionario con el idioma ingresado y la cantidad de peliculas en ese idioma
+def peliculas_idioma(idioma:str):
+    if not isinstance(idioma, str):
+        return 'Debe ingresar un texto'
+    else:
+        respuesta = df_movie[df_movie['original_language'] == idioma].shape[0]
+
+    return {'idioma':idioma, 'cantidad': str(respuesta)}
+    
+ @app.get('/peliculas_duracion/{pelicula}')
+
+# esta funcion pide como parametro en nombre de una pelicula y retorna un diccionario con en nombre de la pelicula, duracion en minutos y el año de estreno
+def peliculas_duracion(pelicula:str):
+    if not isinstance(pelicula, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie['title'] == pelicula).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    else:
+        df = df_movie[df_movie['title'] == pelicula][['runtime','release_year']]
+        respuesta = df['runtime'][0]
+        anio = df['release_year'][0]
+        return {'pelicula':pelicula, 'duracion':str(respuesta), 'anio':str(anio)}
+
+
+
+@app.get('/franquicia/{franquicia}')
+
+# Esta funcion pide como parametro una franquicia y retorna un diccionario con el nombre de la franquicia, cantidad de peliculas que tiene la franquicia, ganancia total (return), y granancia promedio.
+def franquicia(franquicia:str):
+    if not isinstance(franquicia, str):
+        return 'Debe ingresar un texto'
+    elif not (df_movie['belongs_to_collection'] == franquicia).any().any():
+        return 'La pelicula no se encuentra en la base de datos'
+    else:
+        df = df_movie[df_movie['belongs_to_collection'] == franquicia]
+        cantidad = df.shape[0]
+        ganancia_total = df['return'].sum()
+        promedio = ganancia_total/cantidad
+
+        return {'franquicia':franquicia, 'cantidad':str(cantidad), 'ganancia_total': str(ganancia_total), 'ganancia_promedio':str(promedio)}
+
+@app.get('/peliculas_pais/{pais}')
+
+# Esta funcion pide como parametro un nombre de pais y retorna un diccionario con el nombre del pais y la cantidad de peliculas que se filmaron en ese pais.
+def peliculas_pais(pais:str):
+    if not isinstance(pais, str):
+        return 'Debe ingresar un texto'
+    else:
+        cantidad = df_movie[df_movie['production_countries'].apply(lambda paises: pais in paises if isinstance(paises, list) else False)].shape[0]
+        return {'pais':pais, 'cantidad': str(cantidad)}
+
+@app.get('/productoras_exitosas/{productora}')
+
+# Esta funcion pide como parametro el nombre de una productora y devuelve un diccionario con el nombre de la productora, recaudacion total (revenue) y cantidad de peliculas
+def productoras_exitosas(productora:str):
+    if not isinstance(productora, str):
+        return 'Debe ingresar un texto'
+    else:
+        temp_df = df_movie[df_movie['production_companies'].apply(lambda companies: productora in companies if isinstance(companies, list) else False)]
+        cantidad = temp_df.shape[0]
+        revenue_total = temp_df['revenue'].sum()
+        return {'productora':productora, 'revenue_total': str(revenue_total),'cantidad':str(cantidad)}
+
+
+@app.get('/get_director/{nombre_director}')
+
+# esta funcion tiene como parametro un nombre de director de alguna pelicula y retorna en nombre del director, retorno total de las peliculas en las que participo
+# nombre de las peliculas y revenue de cada pelicula.
+def get_director(nombre_director:str):
+    if not isinstance(nombre_director, str):
+        return 'Debe ingresar un texto'
+    elif not any(nombre_director in sublist for sublist in df_movie['directors'] if sublist):
+        return 'El director no se encuentra en la base de datos'
+
+    total_return = 0
+    movies = []
+    years = []
+    _return = []
+    budget = []
+    revenue = []
+    for index,lista in enumerate(df_movie['directors']):
+        if lista:
+            if nombre_director in lista:
+                total_return += df_movie['return'][index]
+                movies.append(df_movie['title'][index])
+                years.append(df_movie['release_year'][index])
+                _return.append(df_movie['return'][index])
+                budget.append(df_movie['budget'][index])
+                revenue.append(df_movie['revenue'][index])
+
+    return {'director':nombre_director, 'retorno_total_director':str(total_return), 
+    'peliculas':str(movies), 'año':str(years), 'retorno_pelicula':str(_return), 
+    'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
 
 
 
 #####################################################################################
 
-# Decorador en el framework FastAPI que define una ruta para una solicitud HTTP GET
 @app.get('/cantidad_filmaciones_mes/{mes}')
 
 # Esta funcion tiene como parametro un mes del año y retorna un diccionario con mes y cantidad de peliculas estrenadas ese mismo mes
@@ -134,38 +224,6 @@ def get_actor(nombre_actor:str):
         avg = _return/n_films
 
     return {'actor':nombre_actor, 'cantidad_filmaciones':str(n_films), 'retorno_total':str(_return), 'retorno_promedio':str(avg)}
-
-
-
-@app.get('/get_director/{nombre_director}')
-
-# esta funcion tiene como parametro un nombre de director de alguna pelicula y retorna en nombre del director, retorno total de las peliculas en las que participo
-# nombre de las peliculas y revenue de cada pelicula.
-def get_director(nombre_director:str):
-    if not isinstance(nombre_director, str):
-        return 'Debe ingresar un texto'
-    elif not any(nombre_director in sublist for sublist in df_movie['directors'] if sublist):
-        return 'El director no se encuentra en la base de datos'
-
-    total_return = 0
-    movies = []
-    years = []
-    _return = []
-    budget = []
-    revenue = []
-    for index,lista in enumerate(df_movie['directors']):
-        if lista:
-            if nombre_director in lista:
-                total_return += df_movie['return'][index]
-                movies.append(df_movie['title'][index])
-                years.append(df_movie['release_year'][index])
-                _return.append(df_movie['return'][index])
-                budget.append(df_movie['budget'][index])
-                revenue.append(df_movie['revenue'][index])
-
-    return {'director':nombre_director, 'retorno_total_director':str(total_return), 
-    'peliculas':str(movies), 'año':str(years), 'retorno_pelicula':str(_return), 
-    'budget_pelicula':str(budget), 'revenue_pelicula':str(revenue)}
 
 
 @app.get('/recomendacion/{titulo}')
